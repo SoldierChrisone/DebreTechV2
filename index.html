@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="hu" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+
+    <!-- SEO Meta -->
+    <title>DebreTech | ATAK & WireGuard VPN Szakértő</title>
+    <meta name="description"
+        content="DebreTech - ATAK/WINTAK rendszerek telepítése, TAK Server üzemeltetés és WireGuard VPN megoldások. Biztonságos taktikai kommunikáció Debrecenből.">
+    <meta name="keywords" content="ATAK, WINTAK, iTAK, TAK Server, WireGuard, VPN, taktikai, Debrecen, biztonság">
+    <meta name="author" content="DebreTech">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0e27">
+    <link rel="canonical" href="https://debretech.hu/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://debretech.hu/">
+    <meta property="og:title" content="DebreTech | ATAK & WireGuard VPN Szakértő">
+    <meta property="og:description" content="ATAK rendszerek, TAK Server és WireGuard VPN megoldások.">
+    <meta property="og:locale" content="hu_HU">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DebreTech | ATAK & WireGuard VPN Szakértő">
+    <meta name="twitter:description" content="ATAK rendszerek, TAK Server és WireGuard VPN megoldások Debrecenből.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🗺️%3C/text%3E%3C/svg%3E">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "DebreTech",
+        "description": "ATAK/WINTAK és WireGuard VPN szakértő Debrecenben",
+        "url": "https://debretech.hu",
+        "email": "info@debretech.hu",
+        "address": {"@type": "PostalAddress", "addressLocality": "Debrecen", "addressCountry": "HU"},
+        "priceRange": "$$"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Skip Link -->
+    <a href="#main" class="skip-link">Ugrás a tartalomhoz</a>
+
+    <!-- ARIA Live Region -->
+    <div id="announcer" class="sr-only" aria-live="polite"></div>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie hozzájárulás">
+        <div class="cookie-banner__content">
+            <svg class="cookie-banner__icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+                <circle cx="8" cy="10" r="1"/><circle cx="12" cy="14" r="1"/><circle cx="16" cy="10" r="1"/>
+            </svg>
+            <p>Ez a weboldal sütiket használ a jobb felhasználói élmény érdekében.</p>
+            <div class="cookie-banner__actions">
+                <button class="btn btn--sm btn--primary" id="cookieAccept">Elfogadom</button>
+                <button class="btn btn--sm btn--ghost" id="cookieDecline">Elutasítom</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav__container">
+            <a href="#hero" class="nav__logo">&lt;DebreTech/&gt;</a>
+
+            <button class="nav__toggle" id="navToggle" aria-label="Menü" aria-expanded="false" aria-controls="navMenu">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav__menu" id="navMenu" role="menu">
+                <li><a href="#hero" class="nav__link active">Kezdőlap</a></li>
+                <li><a href="#services" class="nav__link">Szolgáltatások</a></li>
+                <li><a href="#pricing" class="nav__link">Árazás</a></li>
+                <li><a href="#about" class="nav__link">Rólunk</a></li>
+                <li><a href="#contact" class="nav__link">Kapcsolat</a></li>
+            </ul>
+
+            <button class="theme-toggle" id="themeToggle" aria-label="Téma váltás" title="Sötét/Világos mód">
+                <svg class="theme-toggle__icon theme-toggle__icon--dark" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="theme-toggle__icon theme-toggle__icon--light" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main">
+        <!-- Hero -->
+        <section class="hero" id="hero">
+            <div class="hero__bg">
+                <canvas id="particles"></canvas>
+            </div>
+            <div class="hero__content">
+                <p class="hero__tag reveal">$ ./init_tactical_network.sh</p>
+                <h1 class="hero__title" id="typedTitle"></h1>
+                <p class="hero__subtitle reveal">ATAK/WINTAK Rendszerek • WireGuard VPN • Taktikai Kommunikáció</p>
+
+                <div class="hero__cta reveal">
+                    <a href="#contact" class="btn btn--primary btn--glow">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Ingyenes Konzultáció
+                    </a>
+                    <a href="#services" class="btn btn--secondary">Szolgáltatások</a>
+                </div>
+
+                <div class="hero__trust reveal">
+                    <div class="trust-item">
+                        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L3 7v5c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                        <span>Titkosított Kapcsolat</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span>24h Válasz</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <span>5+ Év Tapasztalat</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="services" id="services">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag reveal">&lt;szolgáltatások&gt;</span>
+                    <h2 class="section-title reveal">Fő Szolgáltatásaink</h2>
+                    <p class="section-desc reveal">Taktikai kommunikáció és biztonságos hálózatok</p>
+                </header>
+
+                <div class="services__grid services__grid--featured">
+                    <!-- FEATURED: ATAK -->
+                    <article class="card card--featured card--glass reveal">
+                        <div class="card__badge">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            Fő Szolgáltatás
+                        </div>
+                        <div class="card__icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <h3 class="card__title">ATAK / WINTAK / iTAK</h3>
+                        <p class="card__desc">Teljes TAK ökoszisztéma telepítése és üzemeltetése. Valós idejű helymeghatározás, csapatkoordináció, offline térképek.</p>
+                        <ul class="card__features">
+                            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> ATAK (Android) telepítés és konfiguráció</li>
+                            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> WINTAK (Windows) beállítás</li>
+                            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> TAK Server üzemeltetés (cloud/helyi)</li>
+                            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Egyedi térképek, plugin-ek</li>
+                            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Oktatás és támogatás</li>
+                        </ul>
+                        <div class="card__tags"><span>ATAK</span><span>WINTAK</span><span>iTAK</span><span>TAK Server</span></div>
+                    </article>
+
+                    <!-- FEATURED: WireGuard VPN -->
+                    <article class="card card--featured card--glass reveal">
+                        <div class="card__badge">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            Fő Szolgáltatás
+                        </div>
+                        <div class="card__icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        <h3 class="card__title">WireGuard VPN</h3>
+                        <p class="card__desc">Modern, gyors és biztonságos VPN megoldások. Ideális távoli hozzáféréshez és a TAK rendszerek védelmére.</p>
+                        <ul class="card__features">
+                            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> WireGuard szerver telepítés</li>
+                            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Kliens konfiguráció (Win/Android/iOS)</li>
+                            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> TAK Server + VPN integráció</li>
+                            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Split tunneling beállítás</li>
+                            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Havi üzemeltetés, monitoring</li>
+                        </ul>
+                        <div class="card__tags"><span>WireGuard</span><span>VPN</span><span>Biztonság</span><span>Titkosítás</span></div>
+                    </article>
+                </div>
+
+                <!-- Secondary Services -->
+                <h3 class="services__subtitle reveal">További Szolgáltatások</h3>
+                <div class="services__grid services__grid--secondary">
+                    <article class="card card--small card--glass reveal">
+                        <div class="card__icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                            </svg>
+                        </div>
+                        <h4 class="card__title">PC Telepítés & Karbantartás</h4>
+                        <p class="card__desc">Hardver szerelés, Windows/Linux telepítés, hibaelhárítás.</p>
+                    </article>
+                    <article class="card card--small card--glass reveal">
+                        <div class="card__icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <h4 class="card__title">Optimalizálás</h4>
+                        <p class="card__desc">GPU/CPU undervolt, teljesítményhangolás, benchmark.</p>
+                    </article>
+                    <article class="card card--small card--glass reveal">
+                        <div class="card__icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1.27A7 7 0 0 1 7.27 19H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h-1V5.73A2 2 0 0 1 12 2z"/>
+                                <circle cx="10" cy="14" r="1"/><circle cx="14" cy="14" r="1"/>
+                            </svg>
+                        </div>
+                        <h4 class="card__title">AI Megoldások</h4>
+                        <p class="card__desc">Ollama, helyi LLM telepítés.</p>
+                    </article>
+                    <article class="card card--small card--glass reveal">
+                        <div class="card__icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <h4 class="card__title">Hálózatépítés</h4>
+                        <p class="card__desc">MikroTik, UniFi konfigurálás.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section class="usecases" id="usecases">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag reveal">&lt;felhasználás&gt;</span>
+                    <h2 class="section-title reveal">Kinek Ajánljuk?</h2>
+                </header>
+
+                <div class="usecases__grid">
+                    <div class="usecase card--glass reveal">
+                        <div class="usecase__icon"><svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+                        <h4>Vadásztársaságok</h4>
+                        <p>Csapatkoordináció, terület térképezés, offline működés</p>
+                    </div>
+                    <div class="usecase card--glass reveal">
+                        <div class="usecase__icon"><svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                        <h4>Biztonsági Cégek</h4>
+                        <p>Személyzet követés, esemény koordináció</p>
+                    </div>
+                    <div class="usecase card--glass reveal">
+                        <div class="usecase__icon"><svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg></div>
+                        <h4>Építőipar</h4>
+                        <p>Munkavédelem, csapatmozgás nyomon követése</p>
+                    </div>
+                    <div class="usecase card--glass reveal">
+                        <div class="usecase__icon"><svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15.6 11.6A9 9 0 0 1 3 4"/><path d="M19 4a9 9 0 0 1-2.42 6.18"/><path d="M10.5 16.5A9 9 0 0 1 3 20"/><path d="M21 14a9 9 0 0 1-7.58 5.5"/></svg></div>
+                        <h4>Filmprodukció</h4>
+                        <p>Stáb koordináció, helyszín megosztás</p>
+                    </div>
+                    <div class="usecase card--glass reveal">
+                        <div class="usecase__icon"><svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M8 14.5L3 19M16 14.5L21 19"/><path d="M12 22V14"/><path d="M4 10h16l-2 4H6L4 10z"/></svg></div>
+                        <h4>Túravezetők</h4>
+                        <p>Csoport követés, offline térképek</p>
+                    </div>
+                    <div class="usecase card--glass reveal">
+                        <div class="usecase__icon"><svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+                        <h4>Airsoft / MilSim</h4>
+                        <p>Valós idejű taktikai helyzet</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process -->
+        <section class="process" id="process">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag reveal">&lt;folyamat&gt;</span>
+                    <h2 class="section-title reveal">Hogyan Működünk?</h2>
+                </header>
+
+                <div class="process__steps">
+                    <div class="step card--glass reveal">
+                        <div class="step__num">1</div>
+                        <h4>Kapcsolatfelvétel</h4>
+                        <p>Írjon és 24 órán belül válaszolunk.</p>
+                    </div>
+                    <div class="step card--glass reveal">
+                        <div class="step__num">2</div>
+                        <h4>Igényfelmérés</h4>
+                        <p>Ingyenes konzultáció az igények megértéséhez.</p>
+                    </div>
+                    <div class="step card--glass reveal">
+                        <div class="step__num">3</div>
+                        <h4>Telepítés</h4>
+                        <p>TAK Server és VPN beüzemelése.</p>
+                    </div>
+                    <div class="step card--glass reveal">
+                        <div class="step__num">4</div>
+                        <h4>Oktatás & Támogatás</h4>
+                        <p>Használat betanítás + havi support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag reveal">&lt;árazás&gt;</span>
+                    <h2 class="section-title reveal">Csomagjaink</h2>
+                    <p class="section-desc reveal">Válassza az Önnek megfelelő csomagot</p>
+                </header>
+
+                <div class="pricing__grid">
+                    <article class="pricing-card card--glass reveal">
+                        <div class="pricing-card__header">
+                            <h3>Alap</h3>
+                            <div class="pricing-card__price">
+                                <span class="pricing-card__amount">Egyedi</span>
+                                <span class="pricing-card__period">árajánlat</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-card__features">
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> ATAK vagy VPN telepítés</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Max. 10 felhasználó</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Email támogatás</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Alapkonfiguráció</li>
+                            <li class="excluded"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-text-3)" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> Havi üzemeltetés</li>
+                            <li class="excluded"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-text-3)" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> Egyedi fejlesztés</li>
+                        </ul>
+                        <a href="#contact" class="btn btn--secondary btn--full">Árajánlat Kérés</a>
+                    </article>
+
+                    <article class="pricing-card pricing-card--popular card--glass reveal">
+                        <div class="pricing-card__popular-badge">Népszerű</div>
+                        <div class="pricing-card__header">
+                            <h3>Pro</h3>
+                            <div class="pricing-card__price">
+                                <span class="pricing-card__amount">Egyedi</span>
+                                <span class="pricing-card__period">árajánlat</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-card__features">
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> TAK + VPN csomag</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Max. 50 felhasználó</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Prioritás támogatás</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Egyedi térképek</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Havi üzemeltetés</li>
+                            <li class="excluded"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-text-3)" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> Dedikált szerver</li>
+                        </ul>
+                        <a href="#contact" class="btn btn--primary btn--full btn--glow">Árajánlat Kérés</a>
+                    </article>
+
+                    <article class="pricing-card card--glass reveal">
+                        <div class="pricing-card__header">
+                            <h3>Vállalati</h3>
+                            <div class="pricing-card__price">
+                                <span class="pricing-card__amount">Egyedi</span>
+                                <span class="pricing-card__period">árajánlat</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-card__features">
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Teljes TAK ökoszisztéma</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 100+ felhasználó</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 24/7 support</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Egyedi fejlesztés</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Dedikált szerver</li>
+                            <li class="included"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--c-success)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> SLA garancia</li>
+                        </ul>
+                        <a href="#contact" class="btn btn--secondary btn--full">Konzultáció Kérés</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- About / Stats -->
+        <section class="about" id="about">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag reveal">&lt;rólunk&gt;</span>
+                    <h2 class="section-title reveal">Számokban</h2>
+                </header>
+
+                <div class="stats">
+                    <div class="stat card--glass reveal">
+                        <span class="stat__num" data-count="50" data-suffix="+">0</span>
+                        <span class="stat__label">Befejezett Projekt</span>
+                    </div>
+                    <div class="stat card--glass reveal">
+                        <span class="stat__num" data-count="5" data-suffix="+">0</span>
+                        <span class="stat__label">Év Tapasztalat</span>
+                    </div>
+                    <div class="stat card--glass reveal">
+                        <span class="stat__num" data-count="100" data-suffix="%">0</span>
+                        <span class="stat__label">Elégedett Ügyfél</span>
+                    </div>
+                    <div class="stat card--glass reveal">
+                        <span class="stat__num" data-count="24" data-suffix="h">0</span>
+                        <span class="stat__label">Válaszidő</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag reveal">&lt;vélemények&gt;</span>
+                    <h2 class="section-title reveal">Ügyfeleink Mondták</h2>
+                </header>
+
+                <div class="testimonials__slider" id="testimonialSlider">
+                    <div class="testimonial card--glass reveal">
+                        <div class="testimonial__stars">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <blockquote class="testimonial__text">"A DebreTech csapata precízen és gyorsan telepítette a TAK rendszerünket. A 30 fős vadásztársaságunk most már valós időben koordinálja a hajtásokat."</blockquote>
+                        <div class="testimonial__author">
+                            <div class="testimonial__avatar">VT</div>
+                            <div>
+                                <strong>Vadász Tamás</strong>
+                                <span>Hajdúsági Vadásztársaság</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial card--glass reveal">
+                        <div class="testimonial__stars">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <blockquote class="testimonial__text">"A WireGuard VPN megoldás tökéletesen működik a biztonsági csapatunk számára. Gyors, megbízható és biztonságos kapcsolat mindenhol."</blockquote>
+                        <div class="testimonial__author">
+                            <div class="testimonial__avatar">KP</div>
+                            <div>
+                                <strong>Kovács Péter</strong>
+                                <span>SecureGuard Kft.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial card--glass reveal">
+                        <div class="testimonial__stars">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--c-accent)" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <blockquote class="testimonial__text">"Kiváló szolgáltatás! Az airsoft csapatunk most már profi szinten tud taktikázni az ATAK rendszerrel. Az oktatás is nagyon alapos volt."</blockquote>
+                        <div class="testimonial__author">
+                            <div class="testimonial__avatar">NA</div>
+                            <div>
+                                <strong>Nagy András</strong>
+                                <span>Delta Force Airsoft</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials__dots" id="testimonialDots"></div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag reveal">&lt;GYIK&gt;</span>
+                    <h2 class="section-title reveal">Gyakori Kérdések</h2>
+                </header>
+
+                <div class="faq__list">
+                    <details class="faq__item card--glass reveal">
+                        <summary>Mi az az ATAK és mire jó?</summary>
+                        <p>Az ATAK (Android Team Awareness Kit) egy taktikai térképező és kommunikációs alkalmazás. Eredetileg katonai célra fejlesztették, de ma már civilek is használhatják csapatkoordinációra, helymeghatározásra és offline térképezésre.</p>
+                    </details>
+                    <details class="faq__item card--glass reveal">
+                        <summary>Szükség van internet kapcsolatra az ATAK-hoz?</summary>
+                        <p>Nem feltétlenül. Az ATAK működik offline is előre letöltött térképekkel. Ha TAK Servert használ, akkor internet vagy helyi hálózat (VPN) szükséges a csapattagok közötti szinkronizációhoz.</p>
+                    </details>
+                    <details class="faq__item card--glass reveal">
+                        <summary>Mennyibe kerül egy TAK + VPN rendszer?</summary>
+                        <p>Az alapszoftver ingyenes (nyílt forráskódú). A telepítés és üzemeltetés díja a csapat méretétől függ. Kérjen ingyenes árajánlatot!</p>
+                    </details>
+                    <details class="faq__item card--glass reveal">
+                        <summary>Milyen garanciát adnak?</summary>
+                        <p>30 napos elégedettségi garancia minden munkánkra. Ha nem működik megfelelően, javítjuk vagy visszaadjuk a díjat.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag reveal">&lt;kapcsolat&gt;</span>
+                    <h2 class="section-title reveal">Kérjen Árajánlatot</h2>
+                    <p class="section-desc reveal">Az első konzultáció díjmentes!</p>
+                </header>
+
+                <div class="contact__wrapper">
+                    <div class="contact__info">
+                        <div class="info-card card--glass reveal">
+                            <div class="info-card__icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:info@debretech.hu">info@debretech.hu</a>
+                            </div>
+                        </div>
+                        <div class="info-card card--glass reveal">
+                            <div class="info-card__icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Telefon</h4>
+                                <a href="tel:+36301234567">+36 30 123 4567</a>
+                            </div>
+                        </div>
+                        <div class="info-card card--glass reveal">
+                            <div class="info-card__icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div>
+                                <h4>Helyszín</h4>
+                                <span>Debrecen, Magyarország</span>
+                            </div>
+                        </div>
+
+                        <div class="guarantee card--glass reveal">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--c-success)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                            <div>
+                                <strong>30 Napos Garancia</strong>
+                                <p>Ha nem elégedett, visszaadjuk a pénzét.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="form card--glass" id="contactForm" novalidate>
+                        <!-- Honeypot -->
+                        <div class="honeypot" aria-hidden="true">
+                            <input type="text" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <div class="form__group">
+                            <label for="name">Név <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required minlength="2" maxlength="100"
+                                autocomplete="name" placeholder="Az Ön neve">
+                        </div>
+
+                        <div class="form__group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required maxlength="254" autocomplete="email"
+                                placeholder="pelda@email.com">
+                        </div>
+
+                        <div class="form__group">
+                            <label for="subject">Szolgáltatás</label>
+                            <select id="subject" name="subject">
+                                <option value="">Válasszon...</option>
+                                <option value="atak">ATAK / WINTAK Telepítés</option>
+                                <option value="takserver">TAK Server Üzemeltetés</option>
+                                <option value="vpn">WireGuard VPN</option>
+                                <option value="takvpn">TAK + VPN Csomag</option>
+                                <option value="pc">PC Telepítés</option>
+                                <option value="other">Egyéb</option>
+                            </select>
+                        </div>
+
+                        <div class="form__group">
+                            <label for="message">Üzenet <span class="required">*</span></label>
+                            <textarea id="message" name="message" required minlength="10" maxlength="2000" rows="4"
+                                placeholder="Írja le igényeit (csapat mérete, felhasználási cél, stb.)"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary btn--full btn--glow">
+                            <span class="btn__text">Árajánlat Kérése</span>
+                            <span class="btn__loader" aria-hidden="true"></span>
+                        </button>
+
+                        <div id="formMessage" class="form__message" role="alert" aria-live="polite"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="#hero" class="footer__logo">&lt;DebreTech/&gt;</a>
+                    <p>Taktikai kommunikáció és biztonságos hálózati megoldások Debrecenből.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Navigáció</h4>
+                    <ul>
+                        <li><a href="#services">Szolgáltatások</a></li>
+                        <li><a href="#pricing">Árazás</a></li>
+                        <li><a href="#about">Rólunk</a></li>
+                        <li><a href="#faq">GYIK</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4>Szolgáltatások</h4>
+                    <ul>
+                        <li><a href="#services">ATAK Telepítés</a></li>
+                        <li><a href="#services">WireGuard VPN</a></li>
+                        <li><a href="#services">TAK Server</a></li>
+                        <li><a href="#contact">Konzultáció</a></li>
+                    </ul>
+                </div>
+                <div class="footer__contact">
+                    <h4>Kapcsolat</h4>
+                    <a href="mailto:info@debretech.hu">info@debretech.hu</a>
+                    <a href="tel:+36301234567">+36 30 123 4567</a>
+                    <span>Debrecen, Magyarország</span>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 DebreTech - Minden jog fenntartva.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Contact -->
+    <div class="floating" id="floating">
+        <a href="tel:+36301234567" class="floating__btn floating__btn--phone" aria-label="Telefon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <a href="mailto:info@debretech.hu" class="floating__btn floating__btn--email" aria-label="Email">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+        </a>
+        <button class="floating__btn floating__btn--toggle" id="floatingToggle" aria-label="Kapcsolat menü" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </button>
+    </div>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Vissza a tetejére">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
